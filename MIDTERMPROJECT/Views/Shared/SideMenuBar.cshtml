@@ -1,0 +1,27 @@
+﻿@model IEnumerable<MIDTERMPROJECT.Models.ViewModels.SideMenuItemVM>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="btn btn-danger">Menu Item</h4>
+    </div>
+
+    <div class="panel-body">
+        <ul class="list-group">
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <li class="list-group-item"><a href="@item.Link" class="btn btn-success btn-block">@item.LinkName</a></li>
+
+                }
+            }
+            <li class="list-group-item"><a href="" class="btn btn-warning btn-block">Facebook</a></li>
+            <li class="list-group-item"><a href="" class="btn btn-primary btn-block">Instagram</a></li>
+
+
+        </ul>
+    </div>
+</div>
+
+

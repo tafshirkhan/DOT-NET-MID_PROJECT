@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MIDTERMPROJECT.Models.Dataase.Post>
+
+@{
+    ViewBag.Title = "ViewPost";
+}
+
+<h2 class="text-primary text-center">EXPLORE ALL THE POST</h2>
+<table class="table">
+    @*<tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User_Post)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th></th>
+        </tr>*@
+
+    @foreach (var post in Model)
+    {
+        
+    <tr>
+        
+        <td class="table-bordered" style="border:1px solid; color:black">
+
+
+            @using (Html.BeginForm("PostAComment", "Social"))
+            {
+                <input class="pull-right" type="text" name="PostCommentBox" style="width:40%; height:40px; font-size:20px; margin-top:10px" placeholder="Add new Comment" />
+                <br /><br /><br />
+                <input type="hidden" name="PostId" value="@post.Id" />
+                @*<a  class="btn btn-success pull-right" href="/Social/PostAComment/@post.Id" style="margin-top:10px;">Comment</a>*@
+                <input type="submit" value="PostComment" class="btn btn-success pull-right" style="margin-top:10px;" />
+            }
+
+
+            <span class="pull-left" style="font-size:20px; color:darkgreen; margin-top:-65px">@post.User_Post </span>
+            <div class="text-center">
+                <img src="@Url.Content(post.Image)" width="200" height="200" />
+                <br />
+                <h4 class="text-center" style="font-size:10px; color:black;">Posted On: @Html.DisplayFor(modelItem => post.CreatedOn)</h4>
+                <br />
+            </div>
+
+        </td>
+
+
+    </tr>
+    }
+
+</table>

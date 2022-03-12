@@ -1,0 +1,39 @@
+﻿@model MIDTERMPROJECT.Models.Dataase.Post
+
+@{
+    ViewBag.Title = "RetriveImage";
+}
+
+<h2>RetriveImage</h2>
+
+<div class="form-horizontal">
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Post)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Post)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            
+            <img src="@Url.Content(Model.Image)" width="300" height="300" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+
+    </dl>
+</div>

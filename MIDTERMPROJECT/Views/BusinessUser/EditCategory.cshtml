@@ -1,0 +1,43 @@
+﻿@model MIDTERMPROJECT.Models.Dataase.Category
+@{
+    ViewBag.Title = "EditCategory";
+}
+
+
+<div class="panel panel-body">
+    <div class="col-md-3">
+        @{ Html.RenderAction("SideMenuBar", "Home");}
+    </div>
+
+    <div class="col-md-9">
+        <br />
+        <h2 class="text-info text-center">Edit Category</h2>
+        <br />
+        <form method="post">
+
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <label>Category Name</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" name="categoryName" class="form-control" value="@Model.categoryName" />
+                </div>
+                
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-2 col-md-offset-3">
+                    <input type="submit" value="Update" class="btn btn-primary form-control" />
+                </div>
+                <div class="col-md-3">
+                    <a href="/Business/Index" class="btn btn-success">Back to List</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+   
+

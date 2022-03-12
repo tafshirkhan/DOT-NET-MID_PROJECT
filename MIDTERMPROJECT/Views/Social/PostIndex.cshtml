@@ -1,0 +1,178 @@
+﻿@model MIDTERMPROJECT.Models.Dataase.Post
+
+@{
+    ViewBag.Title = "PostIndex";
+}
+
+<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+@using (Html.BeginForm("PostIndex", "Social", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h2 class="text-info text-center">ADD POST</h2>
+    <br />
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group row">
+        <div class="col-sm-3">
+            <label>Post Title</label>
+        </div>
+        @*@Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-6">
+
+            @Html.EditorFor(model => model.User_Post, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.User_Post, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+          <div class="col-sm-3">
+              <label>Image</label>
+          </div>
+    
+    <div class="col-md-6">
+            <input class="btn btn-primary" type="file" id="imageBrowse" name="ImageFile" />
+            <hr />
+
+            <div id="imgPreview" class="thumbnail" style="display:none">
+                <img class="img-responsive" id="targetImg" />
+                <div class="caption">
+                    <a href="#" onclick="ClearPreview()"><i class="glyphicon glyphicon-trash"></i></a>
+                    <span id="description"></span>
+                </div>
+                <a href="#" class="btn btn-default" onclick="Uploadimage()">Upload</a>
+            </div>
+
+            <div class="col-md-2 thumbnail" id="uploadedImage">
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+   
+
+
+    <div class="form-group row">
+        <div class="col-sm-3">
+            <label>Created On</label>
+        </div>
+        @*@Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.CreatedOn, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CreatedOn, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-2 col-md-offset-3">
+            <input type="submit" value="Add Post" class="btn btn-primary form-control" />
+        </div>
+        <div class="col-md-3">
+            @*//@Html.ActionLink("Back to List", "Index")*@
+            <a href="/Account/Register" class="btn btn-success">Register Now</a>
+        </div>
+
+    </div>
+</div>
+
+
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+        $(function () {
+            $('#CreatedOn').datetimepicker({
+            }).on('dp.change', function (e) {
+                $(this).date('DateTimePicker').hide();
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#imageBrowse").change(function () {
+
+                var File = this.files;
+
+                if (File && File[0]) {
+                    ReadImage(File[0]);
+                }
+
+            })
+
+        })
+
+
+
+        var ReadImage = function (file) {
+
+            var reader = new FileReader;
+            var image = new Image;
+
+            reader.readAsDataURL(file);
+            reader.onload = function (_file) {
+
+                image.src = _file.target.result;
+                image.onload = function () {
+
+                    var height = this.height;
+                    var width = this.width;
+                    var type = file.type;
+                    var size = ~~(file.size / 1024) + "KB";
+
+                    $("#targetImg").attr('src', _file.target.result);
+                    $("#description").text("Size:" + size + ", " + height + "X " + width + ", " + type + "");
+                    $("#imgPreview").show();
+
+                }
+
+            }
+
+        }
+
+
+        var ClearPreview = function () {
+            $("#imageBrowes").val('');
+            $("#description").text('');
+            $("#imgPreview").hide();
+        }
+
+
+        //var Uploadimage = function () {
+        //    var file = $("#imageBrowse").get(0).files;
+        //    var data = new FormData;
+        //    data.append("ImageFile", file[0]);
+        //    data.append("User_Post", "Hello");
+
+        //    $.ajax({
+        //        type: "Post",
+        //        url: "/Social/AddNewPost",
+        //        data: data,
+        //        contentType: false,
+        //        processData: false,
+        //        success: function (response) {
+        //            ClearPreview();
+        //            $("#uploadedImage").append('<img src="/UploadedImage/' + response + '" class="img-responsive thumbnail"/>');
+        //            //$("#uploadedImage").append('<img src="/Social/RetriveImage?id=' + id + '" class="img-responsive thumbnail"/>');
+
+        //        }
+        //    })
+        //}
+
+
+    </script>
+}
+
+
