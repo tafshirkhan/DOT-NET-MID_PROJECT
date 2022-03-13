@@ -205,6 +205,7 @@
     <Compile Include="Models\ViewModels\postVM.cs" />
     <Compile Include="Models\ViewModels\RegistrationVM.cs" />
     <Compile Include="Models\ViewModels\ReplyVM.cs" />
+    <Compile Include="Models\ViewModels\SideBarBeforeLoginVM.cs" />
     <Compile Include="Models\ViewModels\SideMenuItemVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -362,6 +363,8 @@
     <Content Include="Views\BusinessUser\ProductIndex.cshtml" />
     <Content Include="Views\BusinessUser\InsertNewProducts.cshtml" />
     <Content Include="Views\Social\ViewProfile.cshtml" />
+    <Content Include="Views\Shared\SideBarBeforeLoginView.cshtml" />
+    <Content Include="Views\Home\InnerView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

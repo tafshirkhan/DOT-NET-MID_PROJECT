@@ -4,16 +4,21 @@
     ViewBag.Title = "Login";
 }
 
-@if(TempData["msg"] != null)
-{
-    <span class="label-danger">@TempData["msg"]</span>                        
-}
+<div class="text-center">
+    @if (TempData["msg"] != null)
+    {
+        <span class="text-warning">@TempData["msg"]</span>
+    }
+
+</div>
+
 
 <div class="panel panel-body">
     <div class="col-md-3">
-        @{ Html.RenderAction("SideMenuBar", "Home");}
+        @{ Html.RenderAction("SideBarBeforeLoginView", "Home");}
     </div>
     <div class="col-md-9">
+        
         @using (Html.BeginForm("Login", "Account", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
@@ -21,7 +26,10 @@
             <div class="form-horizontal">
 
                 <h2 class="text-info text-center">Login Now</h2>
+
                 @*<p class="text-center text-danger">@ViewBag.ErrorMessage</p>*@
+
+
                 <br />
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })

@@ -12,7 +12,7 @@ namespace MIDTERMPROJECT.Controllers
 {
     public class SocialController : Controller
     {
-        //[Authorize]
+        
         // GET: Social
         [HttpGet]
         public ActionResult PostIndex()
@@ -25,7 +25,7 @@ namespace MIDTERMPROJECT.Controllers
             return View();
         }
 
-        //[Authorize]
+        
         [HttpPost]
         public ActionResult PostIndex(Post postVM)
         {
@@ -91,7 +91,7 @@ namespace MIDTERMPROJECT.Controllers
         //    //return RedirectToAction("Register", "Account");
         //}
 
-        [Authorize]
+        
         [HttpGet]
         public ActionResult RetriveImage(int id)
         {
@@ -105,6 +105,7 @@ namespace MIDTERMPROJECT.Controllers
             return View(post);
         }
 
+        
         
         [HttpGet]
         public ActionResult ViewPost(Post postVM)
@@ -150,6 +151,7 @@ namespace MIDTERMPROJECT.Controllers
 
         //}
 
+        
         public ActionResult PostAComment(postCommentVM postCommentVM)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
@@ -172,6 +174,7 @@ namespace MIDTERMPROJECT.Controllers
             return RedirectToAction("AllComments");
         }
 
+        
         [HttpGet]
         public ActionResult AllComments()
         {
@@ -185,6 +188,7 @@ namespace MIDTERMPROJECT.Controllers
             return View(allComments);
         }
 
+        
         [HttpPost]
         public ActionResult ReplyComment(ReplyVM replyVM)
         {
@@ -208,6 +212,7 @@ namespace MIDTERMPROJECT.Controllers
         }
 
 
+        
         public ActionResult ViewProfile(int id)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();

@@ -43,7 +43,7 @@ namespace MIDTERMPROJECT.Controllers
 
             _db.Users.Add(user);
             _db.SaveChanges();
-            return RedirectToAction("Index", "Social");
+            return RedirectToAction("InnerView", "Home");
         }
 
         [HttpGet]
@@ -65,7 +65,7 @@ namespace MIDTERMPROJECT.Controllers
                 Session["Id"] = _db.Users.Single(x => x.Username == logVM.Username).Id;
 
                 FormsAuthentication.SetAuthCookie(logVM.Username, false);
-                return RedirectToAction("ViewPost","Social");
+                return RedirectToAction("InnerView", "Home");
             }
             //ViewBag.ErrorMessage = "Invalid User";
             TempData["msg"] = "Invalid Credentials";

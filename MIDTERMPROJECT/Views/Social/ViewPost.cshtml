@@ -49,9 +49,9 @@
                             }
 
 
-                            <span class="pull-left" style="font-size:20px; color:darkgreen; margin-top:-65px">
+                            <span class="pull-left" style="font-size:15px; color:darkgreen; margin-top:-65px">
                                 @post.User_Post
-                                <br />
+                                
                                 <h4 class="text-center" style="font-size:10px; color:black;">Posted On: @Html.DisplayFor(modelItem => post.CreatedOn)</h4>
                             </span>
 
@@ -65,12 +65,12 @@
 
                             @foreach (var comment in post.Comments)
                             {
-                                <h4 class="" style="font-size:10px; color:black;">Comment by: <b style="color:blue;">@Html.DisplayFor(modelItem => comment.User.Username)</b></h4>
+                                <h4 class="" style="font-size:10px; color:black;">Comment by: <b style="color:blue;"><a href="/Social/ViewProfile/@comment.User_id"> @Html.DisplayFor(modelItem => comment.User.Username)</a></b></h4>
                                 <h4 class="" style="font-size:10px; color:black;"><b style="color:green">@Html.DisplayFor(modelItem => comment.Cmnt) </b> Posted On: @Html.DisplayFor(modelItem => comment.CreatedOn)</h4>
 
                                 foreach (var reply in comment.Replies)
                                 {
-                                    <h4 class="" style="font-size:10px; color:black;">Replied by: <b style="color:blue;">@Html.DisplayFor(modelItem => reply.User.Username)</b></h4>
+                                    <h4 class="" style="font-size:10px; color:black;">Replied by: <b style="color:blue;"><a href="/Social/ViewProfile/@reply.User_id"> @Html.DisplayFor(modelItem => reply.User.Username)</a></b></h4>
                                     <h4 class="" style="font-size:10px; color:black;"><b style="color:green">@Html.DisplayFor(modelItem => reply.Reply_Cmnt) </b> Posted On: @Html.DisplayFor(modelItem => reply.CreatedOn)</h4>
                                 }
 
