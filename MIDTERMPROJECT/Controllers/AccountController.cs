@@ -22,7 +22,7 @@ namespace MIDTERMPROJECT.Controllers
         [HttpPost]
         public ActionResult Register(RegistrationVM regVM)
         {
-            friend_finderEntities1 _db = new friend_finderEntities1();
+            friend_finderEntities2 _db = new friend_finderEntities2();
             bool UserExist = _db.Users.Any(x => x.Username == regVM.Username);
             if (UserExist)
             {
@@ -56,7 +56,7 @@ namespace MIDTERMPROJECT.Controllers
         [HttpPost]
         public ActionResult Login(LoginVM logVM)
         {
-            friend_finderEntities1 _db = new friend_finderEntities1();
+            friend_finderEntities2 _db = new friend_finderEntities2();
             bool userExist = _db.Users.Any(u => u.Username == logVM.Username
              && u.Password == logVM.Password);
             if (userExist)

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2c7203340fef49cd921bb350656abda5" Name="Diagram1">
+      <Diagram DiagramId="033acd8f00f44264bbc6e904ec024894" Name="Diagram1">
         <EntityTypeShape EntityType="friend_finderModel.Admin" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="friend_finderModel.Applicant" Width="1.5" PointX="5.25" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="friend_finderModel.Category" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />

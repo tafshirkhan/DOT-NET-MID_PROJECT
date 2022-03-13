@@ -99,14 +99,15 @@
         </EntityType>
         <EntityType Name="Products">
           <Key>
-            <PropertyRef Name="productId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="productId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="productName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="productDescription" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="productPrice" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="productImage" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="productImage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="productDescription" Type="varchar(max)" Nullable="false" />
+          <Property Name="productQuantity" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="categoryId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Reacts">
           <Key>
@@ -318,7 +319,7 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Products">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="categoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -609,14 +610,15 @@
         </EntityType>
         <EntityType Name="Product">
           <Key>
-            <PropertyRef Name="productId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="productId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="productDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="productPrice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="productImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="productImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="productDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="productQuantity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
         </EntityType>
         <EntityType Name="React">
@@ -730,7 +732,7 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Products">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="categoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -926,7 +928,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="friend_finderEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="friend_finderEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Applicants" EntityType="Self.Applicant" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -1029,7 +1031,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="friend_finderModelStoreContainer" CdmEntityContainer="friend_finderEntities1">
+        <EntityContainerMapping StorageEntityContainer="friend_finderModelStoreContainer" CdmEntityContainer="friend_finderEntities2">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="friend_finderModel.Admin">
               <MappingFragment StoreEntitySet="Admins">
@@ -1135,12 +1137,13 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="friend_finderModel.Product">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="productName" ColumnName="productName" />
-                <ScalarProperty Name="productDescription" ColumnName="productDescription" />
                 <ScalarProperty Name="productPrice" ColumnName="productPrice" />
                 <ScalarProperty Name="productImage" ColumnName="productImage" />
-                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="productDescription" ColumnName="productDescription" />
+                <ScalarProperty Name="productQuantity" ColumnName="productQuantity" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

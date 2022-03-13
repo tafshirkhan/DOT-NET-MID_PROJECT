@@ -200,6 +200,7 @@
     </Compile>
     <Compile Include="Models\ViewModels\CategoryVM.cs" />
     <Compile Include="Models\ViewModels\LoginVM.cs" />
+    <Compile Include="Models\ViewModels\NewProductVM.cs" />
     <Compile Include="Models\ViewModels\postCommentVM.cs" />
     <Compile Include="Models\ViewModels\postVM.cs" />
     <Compile Include="Models\ViewModels\RegistrationVM.cs" />
@@ -233,13 +234,6 @@
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\Dataase\FriendFinderModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>FriendFinderModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Dataase\FriendFinderModel.edmx.diagram">
-      <DependentUpon>FriendFinderModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
@@ -317,6 +311,13 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
+    <EntityDeploy Include="Models\Dataase\FriendFinderModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FriendFinderModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Dataase\FriendFinderModel.edmx.diagram">
+      <DependentUpon>FriendFinderModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Custom.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -359,10 +360,12 @@
     <Content Include="Views\BusinessUser\InsertCategory.cshtml" />
     <Content Include="Views\BusinessUser\EditCategory.cshtml" />
     <Content Include="Views\BusinessUser\ProductIndex.cshtml" />
+    <Content Include="Views\BusinessUser\InsertNewProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="PostedImages\" />
+    <Folder Include="ProductImages\" />
     <Folder Include="UploadedImage\" />
   </ItemGroup>
   <ItemGroup>

@@ -33,11 +33,20 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult SideMenuBar()
         {
             List<SideMenuItemVM> list = new List<SideMenuItemVM>();
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    //return RedirectToAction("Login", "Account");
+            //    list.Add(new SideMenuItemVM { Link = "/Account/Register", LinkName = "Register" });
+            //    list.Add(new SideMenuItemVM { Link = "/Account/Login", LinkName = "Login" });
+            //}
+
             list.Add(new SideMenuItemVM { Link = "/Account/Register", LinkName = "Register" });
             list.Add(new SideMenuItemVM { Link = "/Account/Login", LinkName = "Login" });
             list.Add(new SideMenuItemVM { Link = "/BusinessUser/CategoryIndex", LinkName = "All Category" });
             list.Add(new SideMenuItemVM { Link = "/BusinessUser/ProductIndex", LinkName = "All Product" });
             list.Add(new SideMenuItemVM { Link = "/Social/PostIndex", LinkName = "Add New Post" });
+            list.Add(new SideMenuItemVM { Link = "/Social/AllComments", LinkName = "Explore All the Post" });
 
 
             return PartialView("SideMenuBar", list);

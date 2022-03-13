@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="friend_finderModelStoreContainer" CdmEntityContainer="friend_finderEntities1">
+  <EntityContainerMapping StorageEntityContainer="friend_finderModelStoreContainer" CdmEntityContainer="friend_finderEntities2">
     <EntitySetMapping Name="Admins">
       <EntityTypeMapping TypeName="friend_finderModel.Admin">
         <MappingFragment StoreEntitySet="Admins">
@@ -106,12 +106,13 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="friend_finderModel.Product">
         <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="productName" ColumnName="productName" />
-          <ScalarProperty Name="productDescription" ColumnName="productDescription" />
           <ScalarProperty Name="productPrice" ColumnName="productPrice" />
           <ScalarProperty Name="productImage" ColumnName="productImage" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="productDescription" ColumnName="productDescription" />
+          <ScalarProperty Name="productQuantity" ColumnName="productQuantity" />
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

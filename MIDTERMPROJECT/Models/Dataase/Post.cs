@@ -25,10 +25,8 @@ namespace MIDTERMPROJECT.Models.Dataase
         public int Id { get; set; }
         public string User_Post { get; set; }
         public string Image { get; set; }
-        public DateTime? CreatedOn { get; set; }
-
+        public System.DateTime CreatedOn { get; set; }
         public HttpPostedFileBase ImageFile { get; set; }
-        //public HttpPostedFileWrapper ImageFile { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }

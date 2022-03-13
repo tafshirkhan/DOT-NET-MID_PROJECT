@@ -12,19 +12,31 @@ namespace MIDTERMPROJECT.Controllers
 {
     public class SocialController : Controller
     {
-        [Authorize]
+        //[Authorize]
         // GET: Social
         [HttpGet]
         public ActionResult PostIndex()
         {
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         public ActionResult PostIndex(Post postVM)
         {
             //friend_finderEntities1 _db = new friend_finderEntities1();
+
+
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             string fileName = Path.GetFileNameWithoutExtension(postVM.ImageFile.FileName);
             string extension = Path.GetExtension(postVM.ImageFile.FileName);
             fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
@@ -35,7 +47,7 @@ namespace MIDTERMPROJECT.Controllers
             //Post post = new Post();
             //post.User_Post = postVM.User_Post;
             //post.CreatedOn = postVM.CreatedOn;
-            using (friend_finderEntities1 _db = new friend_finderEntities1())
+            using (friend_finderEntities2 _db = new friend_finderEntities2())
             {
                 _db.Posts.Add(postVM);
                 _db.SaveChanges();
@@ -86,7 +98,7 @@ namespace MIDTERMPROJECT.Controllers
             //friend_finderEntities1 _db = new friend_finderEntities1();
             Post post = new Post();
 
-            using(friend_finderEntities1 _db = new friend_finderEntities1())
+            using(friend_finderEntities2 _db = new friend_finderEntities2())
             {
                 post = _db.Posts.Where(x => x.Id == id).FirstOrDefault(); 
             }           
@@ -97,16 +109,37 @@ namespace MIDTERMPROJECT.Controllers
         [HttpGet]
         public ActionResult ViewPost(Post postVM)
         {
-            friend_finderEntities1 _db = new friend_finderEntities1();
+            friend_finderEntities2 _db = new friend_finderEntities2();
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             //bool postExist = _db.Posts.Any(u => u.User_Post == postVM.User_Post);
             //if (postExist)
             //{
             //    Session["Id"] = _db.Posts.Single(x => x.User_Post == postVM.User_Post).Id;
             //}
-            
+
             var allpost = _db.Posts.ToList();
             return View(allpost);
         }
+
+        [HttpPost]
+        public JsonResult DeletePost(int Id)
+        {
+            friend_finderEntities2 _db = new friend_finderEntities2();
+            var data = _db.Posts.Where(x => x.Id == Id).SingleOrDefault();
+
+            if(data != null)
+            {
+                _db.Posts.Remove(data);
+                _db.SaveChanges();
+            }
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
 
         //public ActionResult CommentIndex()
         //{
@@ -119,8 +152,8 @@ namespace MIDTERMPROJECT.Controllers
 
         public ActionResult PostAComment(postCommentVM postCommentVM)
         {
-            friend_finderEntities1 _db = new friend_finderEntities1();
-            
+            friend_finderEntities2 _db = new friend_finderEntities2();
+
             int userId = Convert.ToInt32(Session["Id"]);
             if (userId == 0)
             {
@@ -142,15 +175,20 @@ namespace MIDTERMPROJECT.Controllers
         [HttpGet]
         public ActionResult AllComments()
         {
-            friend_finderEntities1 _db = new friend_finderEntities1();
-            var allComments = _db.Comments.Include(x => x.Replies).ToList();
+            friend_finderEntities2 _db = new friend_finderEntities2();
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            var allComments = _db.Comments.Include(x => x.Replies).OrderByDescending(x=>x.CreatedOn).ToList();
             return View(allComments);
         }
 
         [HttpPost]
         public ActionResult ReplyComment(ReplyVM replyVM)
         {
-            friend_finderEntities1 _db = new friend_finderEntities1();
+            friend_finderEntities2 _db = new friend_finderEntities2();
 
             int userId = Convert.ToInt32(Session["Id"]);
             if(userId == 0)

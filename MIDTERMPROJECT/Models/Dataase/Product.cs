@@ -14,12 +14,13 @@ namespace MIDTERMPROJECT.Models.Dataase
     
     public partial class Product
     {
-        public int productId { get; set; }
+        public int Id { get; set; }
         public string productName { get; set; }
-        public string productDescription { get; set; }
         public string productPrice { get; set; }
         public string productImage { get; set; }
-        public int id { get; set; }
+        public string productDescription { get; set; }
+        public string productQuantity { get; set; }
+        public int categoryId { get; set; }
     
         public virtual Category Category { get; set; }
     }

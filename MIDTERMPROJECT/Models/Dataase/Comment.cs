@@ -24,7 +24,7 @@ namespace MIDTERMPROJECT.Models.Dataase
         public string Cmnt { get; set; }
         public int Post_id { get; set; }
         public int User_id { get; set; }
-        public DateTime? CreatedOn { get; set; }
+        public System.DateTime CreatedOn { get; set; }
     
         public virtual Post Post { get; set; }
         public virtual User User { get; set; }

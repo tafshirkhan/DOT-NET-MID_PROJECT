@@ -18,7 +18,7 @@ namespace MIDTERMPROJECT.Models.Dataase
         public string Reply_Cmnt { get; set; }
         public int Comment_id { get; set; }
         public int User_id { get; set; }
-        public DateTime? CreatedOn { get; set; }
+        public System.DateTime CreatedOn { get; set; }
     
         public virtual Comment Comment { get; set; }
         public virtual User User { get; set; }

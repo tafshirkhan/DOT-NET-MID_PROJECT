@@ -9,14 +9,19 @@
 
 namespace MIDTERMPROJECT.Models.Dataase
 {
+   
+    using MIDTERMPROJECT.Models.ViewModels;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class friend_finderEntities1 : DbContext
+    public partial class friend_finderEntities2 : DbContext
     {
-        public friend_finderEntities1()
-            : base("name=friend_finderEntities1")
+        
+
+        public friend_finderEntities2()
+            : base("name=friend_finderEntities2")
         {
         }
     
@@ -41,5 +46,7 @@ namespace MIDTERMPROJECT.Models.Dataase
         public virtual DbSet<Request> Requests { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        //public virtual DbSet<CategoryVM> CategoryVM { get; set; }
+        //public List<CategoryVM> CategoryVM { get; internal set; }
     }
 }

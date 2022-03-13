@@ -3,52 +3,145 @@
 @{
     ViewBag.Title = "ViewPost";
 }
-
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
 <h2 class="text-primary text-center">EXPLORE ALL THE POST</h2>
-<table class="table">
-    @*<tr>
-            <th>
-                @Html.DisplayNameFor(model => model.User_Post)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedOn)
-            </th>
-            <th></th>
-        </tr>*@
+<div>
+    <table id="viewPost" class="table">
+        @*<tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.User_Post)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </th>
+                <th></th>
+            </tr>*@
 
-    @foreach (var post in Model)
-    {
-        
-    <tr>
-        
-        <td class="table-bordered" style="border:1px solid; color:black">
+        @foreach (var post in Model)
+        {
 
+            <tr>
 
-            @using (Html.BeginForm("PostAComment", "Social"))
-            {
-                <input class="pull-right" type="text" name="PostCommentBox" style="width:40%; height:40px; font-size:20px; margin-top:10px" placeholder="Add new Comment" />
-                <br /><br /><br />
-                <input type="hidden" name="PostId" value="@post.Id" />
-                @*<a  class="btn btn-success pull-right" href="/Social/PostAComment/@post.Id" style="margin-top:10px;">Comment</a>*@
-                <input type="submit" value="PostComment" class="btn btn-success pull-right" style="margin-top:10px;" />
-            }
+                <td class="table-bordered" style="border:1px solid; color:black">
 
 
-            <span class="pull-left" style="font-size:20px; color:darkgreen; margin-top:-65px">@post.User_Post </span>
-            <div class="text-center">
-                <img src="@Url.Content(post.Image)" width="200" height="200" />
-                <br />
-                <h4 class="text-center" style="font-size:10px; color:black;">Posted On: @Html.DisplayFor(modelItem => post.CreatedOn)</h4>
-                <br />
+                    @using (Html.BeginForm("PostAComment", "Social"))
+                    {
+
+                        <input class="pull-right" type="text" name="PostCommentBox" style="width:40%; height:40px; font-size:20px; margin-top:10px" placeholder="Add new Comment" />
+                        <br /><br /><br />
+                        <input type="hidden" name="PostId" value="@post.Id" />
+                        @*<a  class="btn btn-success pull-right" href="/Social/PostAComment/@post.Id" style="margin-top:10px;">Comment</a>*@
+                        <input type="submit" value="PostComment" class="btn btn-success pull-right" style="margin-top:10px;" />
+
+                    }
+
+
+                    <span class="pull-left" style="font-size:20px; color:darkgreen; margin-top:-65px">
+                        @post.User_Post
+                        <br />
+                        <h4 class="text-center" style="font-size:10px; color:black;">Posted On: @Html.DisplayFor(modelItem => post.CreatedOn)</h4>
+                    </span>
+                    @*<h4 class="text-center" style="font-size:10px; color:black;">Posted On: @Html.DisplayFor(modelItem => post.CreatedOn)</h4>*@
+                    <div class="">
+                        <img src="@Url.Content(post.Image)" width="200" height="200" />
+                        <br />
+                        @*<h4 class="text-center" style="font-size:10px; color:black;">Posted On: @Html.DisplayFor(modelItem => post.CreatedOn)</h4>*@
+
+                    </div>
+
+                    @foreach (var comment in post.Comments)
+                    {
+                        <h4 class="" style="font-size:10px; color:black;">Comment by: <b style="color:blue;">@Html.DisplayFor(modelItem => comment.User.Username)</b></h4>
+                        <h4 class="" style="font-size:10px; color:black;"><b style="color:green">@Html.DisplayFor(modelItem => comment.Cmnt) </b> Posted On: @Html.DisplayFor(modelItem => comment.CreatedOn)</h4>
+
+                        foreach (var reply in comment.Replies)
+                        {
+                            <h4 class="" style="font-size:10px; color:black;">Replied by: <b style="color:blue;">@Html.DisplayFor(modelItem => reply.User.Username)</b></h4>
+                            <h4 class="" style="font-size:10px; color:black;"><b style="color:green">@Html.DisplayFor(modelItem => reply.Reply_Cmnt) </b> Posted On: @Html.DisplayFor(modelItem => reply.CreatedOn)</h4>
+                        }
+
+                    }
+                    <a href="" onclick="ConfirmDelete(@post.Id)" class="btn btn-danger pull-right" style="margin-top:10px;">Delete Post</a>
+                </td>
+
+
+            </tr>
+        }
+
+    </table>
+
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h3 class="modal-title">Delete Post</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Are you sure ? You want to delete this post. </h4>
+
+                    <div style="text-align:center;display:none" id="loaderDiv">
+
+                        @*<img src="~/Content/img/2xkV.gif" style="height:200px;width:200px" />*@
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                    <a href="#" class="btn btn-success" onclick="DeletePost()">Confirm</a>
+                </div>
+
             </div>
 
-        </td>
+        </div>
+
+    </div>
+
+    <input type="hidden" id="Id" />
+</div>
+
+@section Scripts{
+
+    <script>
+
+        var ConfirmDelete = function (Id) {
+
+            $("#Id").val(Id);
+            $("#myModal").modal('show');
+
+        }
+
+        var DeletePost = function () {
+
+            $("#loaderDiv").show();
+
+            var postId = $("#Id").val();
+
+            $.ajax({
+
+                type: "POST",
+                url: "/Social/DeletePost",
+                data: { Id: postId },
+                success: function (result) {
+                    $("#loaderDiv").hide();
+                    $("#myModal").modal("hide");
+                    $("#row_" + postId).remove();
+
+                }
+
+            })
+
+        }
+    </script>
 
 
-    </tr>
-    }
-
-</table>
+}

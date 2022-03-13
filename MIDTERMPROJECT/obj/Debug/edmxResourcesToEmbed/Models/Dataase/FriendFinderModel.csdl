@@ -112,14 +112,15 @@
   </EntityType>
   <EntityType Name="Product">
     <Key>
-      <PropertyRef Name="productId" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="productId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="productDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="productPrice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="productImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="productImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="productDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="productQuantity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="categoryId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Category" Relationship="Self.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
   </EntityType>
   <EntityType Name="React">
@@ -233,7 +234,7 @@
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Products">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="categoryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -429,7 +430,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="friend_finderEntities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="friend_finderEntities2" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Admins" EntityType="Self.Admin" />
     <EntitySet Name="Applicants" EntityType="Self.Applicant" />
     <EntitySet Name="Categories" EntityType="Self.Category" />

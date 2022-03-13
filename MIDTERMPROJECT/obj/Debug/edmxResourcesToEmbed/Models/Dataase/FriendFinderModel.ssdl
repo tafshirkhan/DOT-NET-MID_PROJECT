@@ -94,14 +94,15 @@
   </EntityType>
   <EntityType Name="Products">
     <Key>
-      <PropertyRef Name="productId" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="productId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="productName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="productDescription" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="productPrice" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="productImage" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="productImage" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="productDescription" Type="varchar(max)" Nullable="false" />
+    <Property Name="productQuantity" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="categoryId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Reacts">
     <Key>
@@ -313,7 +314,7 @@
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Products">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="categoryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
