@@ -125,20 +125,20 @@ namespace MIDTERMPROJECT.Controllers
             return View(allpost);
         }
 
-        [HttpPost]
-        public JsonResult DeletePost(int Id)
-        {
-            friend_finderEntities2 _db = new friend_finderEntities2();
-            var data = _db.Posts.Where(x => x.Id == Id).SingleOrDefault();
+        //[HttpPost]
+        //public JsonResult DeletePost(int Id)
+        //{
+        //    friend_finderEntities2 _db = new friend_finderEntities2();
+        //    var data = _db.Posts.Where(x => x.Id == Id).SingleOrDefault();
 
-            if(data != null)
-            {
-                _db.Posts.Remove(data);
-                _db.SaveChanges();
-            }
+        //    if(data != null)
+        //    {
+        //        _db.Posts.Remove(data);
+        //        _db.SaveChanges();
+        //    }
 
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
 
 
         //public ActionResult CommentIndex()
@@ -205,6 +205,19 @@ namespace MIDTERMPROJECT.Controllers
             _db.SaveChanges();
             return RedirectToAction("AllComments");
 
+        }
+
+
+        public ActionResult ViewProfile(int id)
+        {
+            friend_finderEntities2 _db = new friend_finderEntities2();
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            var uId = (from n in _db.Users where n.Id == id select n).FirstOrDefault();
+            return View(uId);
         }
     }
 }

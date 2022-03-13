@@ -4,50 +4,64 @@
     ViewBag.Title = "AllComments";
 }
 
-<h2 class="text-center text-primary">EXPLORING ALL THE POST</h2>
 
-<table class="table">
-
-@foreach (var item in Model) {
-    <tr>
-
-        <td>
-            @*@Html.DisplayFor(modelItem => item.Post.User_Post)*@
-            
-            <div class="text-center">
-                <span style="font-size:20px; color:darkgreen; margin-top:10px">@item.Post.User_Post </span>
-                <br />
-                <img src="@Url.Content(item.Post.Image)" width="200" height="200" />
-                <br />
-                <h4 class="text-center" style="font-size:10px; color:black;">Comment posted by: <b style="color:blue;">@Html.DisplayFor(modelItem => item.User.Username)</b></h4> 
-                <h4 class="text-center" style="font-size:10px; color:black;"><b style="color:green">@Html.DisplayFor(modelItem => item.Cmnt) </b> Posted On: @Html.DisplayFor(modelItem => item.CreatedOn)</h4>
-                
-            </div>
-            
-            <div class="text-center">
-                <span style="font-size:20px; color:black; margin-top:10px"><b>All Replies</b> </span>
-                @foreach (var reply in item.Replies)
-                {
-                    <h4 class="text-center" style="font-size:10px; color:black;">Replied by: <b style="color:blue;">@Html.DisplayFor(modelItem => reply.User.Username)</b></h4>
-                    <h4 class="text-center" style="font-size:10px; color:black;"><b style="color:green">@Html.DisplayFor(modelItem => reply.Reply_Cmnt) </b> Posted On: @Html.DisplayFor(modelItem => reply.CreatedOn)</h4>
-
-                }
-                <br />
-                @using(Html.BeginForm("ReplyComment", "Social", FormMethod.Post))
-                {
-                    <input type="text" name="ReplyComment" style="width:100%; height:80px;" />
-                    <br />
-                    <input type="hidden" name="CommentId" value="@item.Id" />
-                    <input type="submit" value="Reply Comment" class="btn btn-danger" style="margin-top:10px;" />
-                }
+<div class="panel panel-body">
+    <div class="col-md-3">
+        @{ Html.RenderAction("SideMenuBar", "Home");}
+    </div>
 
 
-            </div>
-        </td>
-       
-        
-       
-    </tr>
-}
+    <div class="col-md-9">
+        <h2 class="text-center text-primary">EXPLORING ALL THE POST</h2>
 
-</table>
+        <table class="table">
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Post.User_Post)*@
+
+                        <div class="">
+                            <span style="font-size:20px; color:darkgreen; margin-top:10px"><b>@item.Post.User_Post</b> </span>
+                            <br />
+                            
+                            <img src="@Url.Content(item.Post.Image)" width="200" height="200" />
+                            <br />
+                            <h4 class="" style="font-size:10px; color:black;">Comment posted by: <b style="color:blue;"><a href="/Social/ViewProfile/@item.User_id">@Html.DisplayFor(modelItem => item.User.Username)</a></b></h4>
+                            <h4 class="r" style="font-size:10px; color:black;"><b style="color:green">@Html.DisplayFor(modelItem => item.Cmnt) </b> Posted On: @Html.DisplayFor(modelItem => item.CreatedOn)</h4>
+
+                        </div>
+
+                        <div class="">
+                            <span style="font-size:20px; color:black; margin-top:10px"><b>All Replies</b> </span>
+                            @foreach (var reply in item.Replies)
+                            {
+                                <h4 class="" style="font-size:10px; color:black;">Replied by: <b style="color:blue;"><a href="/Social/ViewProfile/@reply.User_id">@Html.DisplayFor(modelItem => reply.User.Username)</a></b></h4>
+                                <h4 class="" style="font-size:10px; color:black;"><b style="color:green">@Html.DisplayFor(modelItem => reply.Reply_Cmnt) </b> Posted On: @Html.DisplayFor(modelItem => reply.CreatedOn)</h4>
+
+                            }
+                            <br />
+                            @using (Html.BeginForm("ReplyComment", "Social", FormMethod.Post))
+                            {
+                                <input type="text" name="ReplyComment" style="width:80%; height:50px;" />
+                                <br />
+                                <input type="hidden" name="CommentId" value="@item.Id" />
+                                <input type="submit" value="Reply to the Comment" class="btn btn-danger" style="margin-top:10px; font-size:10px;" />
+                            }
+
+
+                        </div>
+                    </td>
+
+
+
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+    
