@@ -14,10 +14,11 @@ namespace MIDTERMPROJECT.Models.ViewModels
         
         [Required, MinLength(5)]
         public string User_Post { get; set; }
+        
         [DisplayName("Upload File")]
         public string Image { get; set; }
         public DateTime? CreatedOn { get; set; }
-
+        [Required]
         public HttpPostedFileBase ImageFile { get; set; }
     }
 }

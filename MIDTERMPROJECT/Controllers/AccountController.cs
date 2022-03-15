@@ -43,7 +43,7 @@ namespace MIDTERMPROJECT.Controllers
 
             _db.Users.Add(user);
             _db.SaveChanges();
-            return RedirectToAction("InnerView", "Home");
+            return RedirectToAction("Login");
         }
 
         [HttpGet]

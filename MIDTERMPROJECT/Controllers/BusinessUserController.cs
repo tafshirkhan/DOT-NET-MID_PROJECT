@@ -16,6 +16,11 @@ namespace MIDTERMPROJECT.Controllers
         // GET: BusinessUser
         public ActionResult CategoryIndex()
         {
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 
@@ -23,6 +28,11 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult GetAllCategory()
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
             var allCat = _db.Categories;
             return Json(new { data = allCat }, JsonRequestBehavior.AllowGet);
         }
@@ -30,7 +40,12 @@ namespace MIDTERMPROJECT.Controllers
         [HttpGet]
         public ActionResult InsertCategory()
         {
-            return View();
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            return View(new CategoryVM ());
         }
 
         [HttpPost]
@@ -46,12 +61,21 @@ namespace MIDTERMPROJECT.Controllers
             //    return RedirectToAction("CategoryIndex");
             //}
 
-            Category cat = new Category();
-            cat.categoryName = categoryVM.categoryName;
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+             }
 
-            _db.Categories.Add(cat);
-            _db.SaveChanges();
-            return RedirectToAction("CategoryIndex");
+            if (ModelState.IsValid)
+            {
+                Category cat = new Category();
+                cat.categoryName = categoryVM.categoryName;
+                _db.Categories.Add(cat);
+                _db.SaveChanges();
+                return RedirectToAction("CategoryIndex");
+            }
+            return View(categoryVM);
         }
 
 
@@ -59,6 +83,11 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult EditCategory(int id)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             var category = (from n in _db.Categories where n.id == id select n).FirstOrDefault();
             return View(category);
         }
@@ -67,6 +96,11 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult EditCategory(Category category)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             _db.Entry(category).State = EntityState.Modified;
             _db.SaveChanges();
             return RedirectToAction("CategoryIndex");
@@ -78,6 +112,11 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult DeleteCategory(int id)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             Category catId = _db.Categories.Where(x => x.id == id).FirstOrDefault<Category>();
             //if (catId == null)
             //{
@@ -86,7 +125,7 @@ namespace MIDTERMPROJECT.Controllers
             _db.Categories.Remove(catId);
             _db.SaveChanges();
             return Json(new { success = true, message = "Delete Successful" }, JsonRequestBehavior.AllowGet);
-
+            // message = "Delete Successful"
         }
 
 
@@ -95,6 +134,11 @@ namespace MIDTERMPROJECT.Controllers
 
         public ActionResult ProductIndex()
         {
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 
@@ -102,6 +146,11 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult GetAllProduct()
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             var allPro = _db.Products.ToList();
             return Json(new { data = allPro }, JsonRequestBehavior.AllowGet);
         }
@@ -110,6 +159,11 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult InsertNewProducts()
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             //var product = new ProductDTO();
             //product.ProductTypeMaster = _db.Category.ToList();
             //ViewBag.SubmitValue = "Save";
@@ -124,12 +178,25 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult InsertNewProducts(NewProductVM productVM)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            string fileName = Path.GetFileNameWithoutExtension(productVM.ImageFiles.FileName);
+            string extension = Path.GetExtension(productVM.ImageFiles.FileName);
+            fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            productVM.productImage = "~/ProductImages/" + fileName;
+            fileName = Path.Combine(Server.MapPath("~/ProductImages/"), fileName);
+            productVM.ImageFiles.SaveAs(fileName);
+
 
             Product product = new Product();
             product.productName = productVM.productName;
             product.productDescription = productVM.productDescription;
             product.productPrice = productVM.productPrice;
-            product.productImage = "STR";
+            product.productImage = productVM.productImage;
             product.categoryId = productVM.categoryId;
 
             _db.Products.Add(product);

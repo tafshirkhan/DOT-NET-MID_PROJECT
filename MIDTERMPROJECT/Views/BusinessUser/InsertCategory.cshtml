@@ -1,4 +1,4 @@
-﻿@model MIDTERMPROJECT.Models.Dataase.Category
+﻿@model MIDTERMPROJECT.Models.ViewModels.CategoryVM
 
 @{
     ViewBag.Title = "InsertCategory";
@@ -22,8 +22,11 @@
                 <div class="col-md-6">
                     @*<input type="text" name="categoryName" class="form-control" />*@
 
-                    @Html.EditorFor(model => model.categoryName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.categoryName, "", new { @class = "text-danger" })
+                    @*@Html.EditorFor(model => model.categoryName, new { htmlAttributes = new { @class = "form-control" } })
+                 @Html.ValidationMessageFor(model => model.categoryName, "", new { @class = "text-danger" })*@
+                    
+                    <input type="text" placeholder="Category Name" name="categoryName" value="@Model.categoryName" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.categoryName, "", new { @class = "text-danger" })<br />
                 </div>
 
             </div>
