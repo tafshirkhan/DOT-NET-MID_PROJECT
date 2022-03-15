@@ -17,11 +17,12 @@ namespace MIDTERMPROJECT.Controllers
         [HttpGet]
         public ActionResult PostIndex()
         {
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
+
             return View(new postVM());
         }
 
@@ -32,11 +33,12 @@ namespace MIDTERMPROJECT.Controllers
             //friend_finderEntities1 _db = new friend_finderEntities1();
 
 
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
+
             string fileName = Path.GetFileNameWithoutExtension(postVM.ImageFile.FileName);
             string extension = Path.GetExtension(postVM.ImageFile.FileName);
             fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
@@ -112,11 +114,12 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult ViewPost(Post postVM)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
+
             //bool postExist = _db.Posts.Any(u => u.User_Post == postVM.User_Post);
             //if (postExist)
             //{
@@ -158,10 +161,11 @@ namespace MIDTERMPROJECT.Controllers
             friend_finderEntities2 _db = new friend_finderEntities2();
 
             int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
+
             //var data = (from n in _db.Posts where n.Id == id select n).FirstOrDefault();
             //var post = _db.Posts.ToList();
             Comment comment = new Comment();
@@ -181,10 +185,11 @@ namespace MIDTERMPROJECT.Controllers
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
             int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
             var allComments = _db.Comments.Include(x => x.Replies).OrderByDescending(x=>x.CreatedOn).ToList();
             return View(allComments);
         }
@@ -196,10 +201,11 @@ namespace MIDTERMPROJECT.Controllers
             friend_finderEntities2 _db = new friend_finderEntities2();
 
             int userId = Convert.ToInt32(Session["Id"]);
-            if(userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //if(userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
+
             Reply reply = new Reply();
             reply.Reply_Cmnt = replyVM.ReplyComment;
             reply.Comment_id = replyVM.CommentId;
@@ -218,10 +224,10 @@ namespace MIDTERMPROJECT.Controllers
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
             int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
             var uId = (from n in _db.Users where n.Id == id select n).FirstOrDefault();
             return View(uId);
         }

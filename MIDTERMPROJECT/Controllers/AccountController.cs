@@ -54,17 +54,24 @@ namespace MIDTERMPROJECT.Controllers
 
         
         [HttpPost]
-        public ActionResult Login(LoginVM logVM)
+        public ActionResult Login(User user)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
-            bool userExist = _db.Users.Any(u => u.Username == logVM.Username
-             && u.Password == logVM.Password);
-            if (userExist)
+            //bool userExist = _db.Users.Any(u => u.Username == logVM.Username
+            // && u.Password == logVM.Password);
+            var data = (from e in _db.Users
+                        where e.Password.Equals(user.Password)
+                        && e.Username.Equals(user.Username)
+                        select e).FirstOrDefault();
+            
+            if (data != null)
             {
                 //Session["Id"] = _db.Users.Where(x => x.Username == logVM.Username).FirstOrDefault();
-                Session["Id"] = _db.Users.Single(x => x.Username == logVM.Username).Id;
+                //Session["Id"] = _db.Users.Single(x => x.Username == logVM.Username).Id;
 
-                FormsAuthentication.SetAuthCookie(logVM.Username, false);
+                FormsAuthentication.SetAuthCookie(data.Username, false);
+                Session["Type"] = data.Type;
+                Session["Id"] = data.Id;
                 return RedirectToAction("InnerView", "Home");
             }
             //ViewBag.ErrorMessage = "Invalid User";

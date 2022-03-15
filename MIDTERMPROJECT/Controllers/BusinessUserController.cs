@@ -1,4 +1,5 @@
 ﻿
+using MIDTERMPROJECT.Auth;
 using MIDTERMPROJECT.Models.Dataase;
 using MIDTERMPROJECT.Models.ViewModels;
 using System;
@@ -13,14 +14,17 @@ namespace MIDTERMPROJECT.Controllers
 {
     public class BusinessUserController : Controller
     {
+        [Authorize]
+        [AdminAccess]
         // GET: BusinessUser
         public ActionResult CategoryIndex()
         {
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
+
             return View();
         }
 
@@ -28,11 +32,13 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult GetAllCategory()
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
+
             _db.Configuration.ProxyCreationEnabled = false;
             var allCat = _db.Categories;
             //return View(allCat);
@@ -43,11 +49,12 @@ namespace MIDTERMPROJECT.Controllers
         [HttpGet]
         public ActionResult InsertCategory()
         {
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
+
             return View(new CategoryVM ());
         }
 
@@ -64,11 +71,11 @@ namespace MIDTERMPROJECT.Controllers
             //    return RedirectToAction("CategoryIndex");
             //}
 
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-             }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            // }
 
             if (ModelState.IsValid)
             {
@@ -86,11 +93,11 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult EditCategory(int id)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
             var category = (from n in _db.Categories where n.id == id select n).FirstOrDefault();
             return View(category);
         }
@@ -99,11 +106,12 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult EditCategory(Category category)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
+
             _db.Entry(category).State = EntityState.Modified;
             _db.SaveChanges();
             return RedirectToAction("CategoryIndex");
@@ -115,11 +123,11 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult DeleteCategory(int id)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
             Category catId = _db.Categories.Where(x => x.id == id).FirstOrDefault<Category>();
             //if (catId == null)
             //{
@@ -137,11 +145,12 @@ namespace MIDTERMPROJECT.Controllers
 
         public ActionResult ProductIndex()
         {
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
+
             return View();
         }
 
@@ -151,11 +160,11 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult GetAllProduct()
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
             _db.Configuration.ProxyCreationEnabled = false;
             var allPro = _db.Products.ToList();
             return Json(new { data = allPro }, JsonRequestBehavior.AllowGet);
@@ -175,11 +184,11 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult InsertNewProducts()
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
             //var product = new ProductDTO();
             //product.ProductTypeMaster = _db.Category.ToList();
             //ViewBag.SubmitValue = "Save";
@@ -201,11 +210,11 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult InsertNewProducts(Product productVM)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
 
             string fileName = Path.GetFileNameWithoutExtension(productVM.ImageFiles.FileName);
             string extension = Path.GetExtension(productVM.ImageFiles.FileName);
@@ -233,11 +242,11 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult EditProduct(int id)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
             //var product = _db.Products.Find(id);
             var catList = _db.Categories.ToList();
             var product = (from n in _db.Products where n.Id == id select n).FirstOrDefault();
@@ -252,11 +261,11 @@ namespace MIDTERMPROJECT.Controllers
         public ActionResult DeleteProduct(int id)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
-            int userId = Convert.ToInt32(Session["Id"]);
-            if (userId == 0)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //int userId = Convert.ToInt32(Session["Id"]);
+            //if (userId == 0)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
             Product proId = _db.Products.Where(x => x.Id == id).FirstOrDefault<Product>();
             //if (catId == null)
             //{

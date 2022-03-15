@@ -11,7 +11,7 @@ namespace MIDTERMPROJECT.Controllers
     {
         public ActionResult Index()
         {
-            Session["Id"] = 0;
+            //Session["Id"] = 0;
             return View();
         }
 
@@ -54,7 +54,7 @@ namespace MIDTERMPROJECT.Controllers
             list.Add(new SideMenuItemVM { Link = "/BusinessUser/ProductIndex", LinkName = "All Product" });
             list.Add(new SideMenuItemVM { Link = "/Purchase/PurchaseIndex", LinkName = "Purchase Product" });
             list.Add(new SideMenuItemVM { Link = "/Social/PostIndex", LinkName = "Add New Post" });
-            list.Add(new SideMenuItemVM { Link = "/Social/AllComments", LinkName = "Explore All the Post" });
+            list.Add(new SideMenuItemVM { Link = "/Social/AllComments", LinkName = "Explore All the Comment" });
             list.Add(new SideMenuItemVM { Link = "/Social/ViewPost", LinkName = "View Post" });
             list.Add(new SideMenuItemVM { Link = "/Account/Logout", LinkName = "Logout" });
 
