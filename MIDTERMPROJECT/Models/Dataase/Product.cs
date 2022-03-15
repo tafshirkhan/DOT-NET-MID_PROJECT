@@ -11,7 +11,9 @@ namespace MIDTERMPROJECT.Models.Dataase
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+    using System.Web.Mvc;
+
     public partial class Product
     {
         public int Id { get; set; }
@@ -21,7 +23,10 @@ namespace MIDTERMPROJECT.Models.Dataase
         public string productDescription { get; set; }
         public string productQuantity { get; set; }
         public int categoryId { get; set; }
-    
+
+        //public SelectList CategoryList { get; set; }
+        public HttpPostedFileBase ImageFiles { get; set; }
+
         public virtual Category Category { get; set; }
     }
 }

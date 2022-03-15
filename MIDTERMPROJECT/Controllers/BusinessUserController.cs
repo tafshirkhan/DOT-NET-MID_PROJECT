@@ -142,6 +142,8 @@ namespace MIDTERMPROJECT.Controllers
             return View();
         }
 
+
+
         [HttpGet]
         public ActionResult GetAllProduct()
         {
@@ -154,6 +156,15 @@ namespace MIDTERMPROJECT.Controllers
             var allPro = _db.Products.ToList();
             return Json(new { data = allPro }, JsonRequestBehavior.AllowGet);
         }
+
+        //public ActionResult ListOfCat()
+        //{
+        //    friend_finderEntities2 _db = new friend_finderEntities2();
+        //    var catList = _db.Categories.ToList();
+
+        //    ViewBag.CatList = new SelectList(catList, "id", "categoryName");
+        //    return View();
+        //}
 
         [HttpGet]
         public ActionResult InsertNewProducts()
@@ -168,14 +179,21 @@ namespace MIDTERMPROJECT.Controllers
             //product.ProductTypeMaster = _db.Category.ToList();
             //ViewBag.SubmitValue = "Save";
 
-            List<Category> CategoryList = _db.Categories.OrderBy(a => a.categoryName).ToList();
-            ViewBag.CategoryList = new SelectList(CategoryList, "id", "categoryName");
+            //List<Category> CategoryList = _db.Categories.OrderBy(a => a.categoryName).ToList();
+            //ViewBag.CategoryList = new SelectList(CategoryList, "id", "categoryName");
+            var catList = _db.Categories.ToList();
+
+            //var pro = _db.Products;
+            //pro.CategoryList = new SelectList(catList, "id", "categoryName");
+
+            ViewBag.CatList = new SelectList(catList, "id", "categoryName");
+
             return View();
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult InsertNewProducts(NewProductVM productVM)
+        public ActionResult InsertNewProducts(Product productVM)
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
             int userId = Convert.ToInt32(Session["Id"]);
@@ -191,17 +209,19 @@ namespace MIDTERMPROJECT.Controllers
             fileName = Path.Combine(Server.MapPath("~/ProductImages/"), fileName);
             productVM.ImageFiles.SaveAs(fileName);
 
+            //Product product = new Product();
+            //product.productName = productVM.productName;
+            //product.productDescription = productVM.productDescription;
+            //product.productPrice = productVM.productPrice;
+            //product.productImage = productVM.productImage;
+            //product.categoryId = productVM.categoryId;
 
-            Product product = new Product();
-            product.productName = productVM.productName;
-            product.productDescription = productVM.productDescription;
-            product.productPrice = productVM.productPrice;
-            product.productImage = productVM.productImage;
-            product.categoryId = productVM.categoryId;
+            //_db.Entry(productVM).State = EntityState.Modified;
 
-            _db.Products.Add(product);
+            _db.Products.Add(productVM);
+
             _db.SaveChanges();
-            return RedirectToAction("ProductIndex");
+            return RedirectToAction("ProductIndex", new { id=productVM.Id});
         }
 
         //[HttpGet]

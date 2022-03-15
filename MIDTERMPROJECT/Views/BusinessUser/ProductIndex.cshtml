@@ -1,4 +1,4 @@
-﻿@model List<MIDTERMPROJECT.Models.Dataase.Category>
+﻿@model List<MIDTERMPROJECT.Models.Dataase.Product>
 @{
     ViewBag.Title = "Index";
 }
@@ -28,9 +28,10 @@
                 <thead class="text-info">
                     <tr class="table-info">
                         <th>Product Name</th>
-                        <th>Description</th>
                         <th>Price</th>
                         <th>Image Path</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
                         <th>Category</th>
                         <th></th>
                     </tr>
@@ -62,10 +63,12 @@
                     },
                     "columns": [
                         { "data": "productName", "width": "20%" },
-                        { "data": "productDescription", "width": "20%" },
                         { "data": "productPrice", "width": "20%" },
                         { "data": "productImage", "width": "20%" },
-                        { "data": "id", "width": "20%" },
+                        { "data": "productDescription", "width": "20%" },
+                        { "data": "productQuantity", "width": "20%" },
+                        
+                        { "data": "categoryId", "width": "20%" },
                         {
                             "data": "id",
                             "render": function (data) {
@@ -96,7 +99,7 @@
                     if (willDelete) {
                         $.ajax({
                             type: "POST",
-                            url: '@Url.Action("DeleteCategory", "BusinessUser")/' + id,
+                            url: '@Url.Action()/' + id,
                             success: function (data) {
                                 if (data.success) {
                                     toastr.success(data.message);

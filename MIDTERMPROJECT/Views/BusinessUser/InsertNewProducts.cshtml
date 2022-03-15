@@ -1,4 +1,4 @@
-﻿@model MIDTERMPROJECT.Models.ViewModels.NewProductVM
+﻿@model MIDTERMPROJECT.Models.Dataase.Product
 @{
     ViewBag.Title = "InsertNewProducts";
 
@@ -103,17 +103,21 @@
                                 <label>Category</label>
                             </div>
                             @*@Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            <div class="col-md-6">
-                                @*@Html.EditorFor(model => model.categoryId, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })*@
+                <div class="col-md-6">
+                    @*@Html.EditorFor(model => model.categoryId, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })*@
 
-                                @if (ViewBag.CategoryList != null)
-                                {
-                                    @Html.DropDownListFor(model => model.categoryId, ViewBag.CategoryList as SelectList, "--Select Category--",
-                                    new { @class = "form-control" })
-                                }
-                            </div>
-                    @Html.HiddenFor(model=>model.categoryId)
+                    @Html.DropDownListFor(model => model.categoryId, ViewBag.CatList as SelectList, "--Select Category---", new {@class="form-control" })
+
+                    @*@Html.DropDownListFor(model => model.categoryId, Model.CatList as SelectList, "--Select Category---", new { @class = "form-control" })*@
+
+                    @*@if (ViewBag.CategoryList != null)
+        {
+            @Html.DropDownListFor(model => model.categoryId, ViewBag.CategoryList as SelectList, "--Select Category--",
+            new { @class = "form-control" })
+        }*@
+                </div>
+                    @*@Html.HiddenFor(model=>model.categoryId)*@
                 </div>
 
                 <div class="form-group row">
