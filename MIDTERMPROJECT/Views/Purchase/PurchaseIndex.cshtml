@@ -1,0 +1,154 @@
+﻿
+@model IEnumerable<MIDTERMPROJECT.Models.Dataase.Product>
+
+@{
+    ViewBag.Title = "PurchaseIndex";
+}
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>*@
+
+<div class="panel panel-body">
+    <div class="col-md-3">
+        @{ Html.RenderAction("SideMenuBar", "Home");}
+    </div>
+
+    <div class="col-md-9">
+        <h2 class="text-primary text-center">EXPLORE ALL THE POST</h2>
+        <div>
+            <table id="viewPost" class="table">
+                @*<tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User_Post)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Image)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedOn)
+                    </th>
+                    <th></th>
+                </tr>*@
+
+                @foreach (var post in Model)
+                {
+
+                    <tr>
+
+                        <td class="table-bordered" style="border:1px solid; color:black">
+                            <h4 style="color:black; font-size:10px;">Product Name: <b style="font-size:10px; color:red;">@post.productName</b></h4>
+
+                            <h4 style="color:black; font-size:10px;">Product Price: <b style="font-size:10px; color:red;">@post.productPrice</b></h4>
+                            @*<h4 style="color:black; font-size:10px;">Product Details: <b style="font-size:10px; color:red;">@post.productDescription</b></h4>*@
+                            <h4 style="color:black; font-size:10px;">Product Category: <b style="font-size:10px; color:red;">@post.Category.categoryName</b></h4>
+                            <img src="@Url.Content(post.productImage)" width="100" height="100" />
+                            <!--<div class="pull-left">
+                                <img src="@Url.Content(post.productImage)" width="100" height="100" />
+                                <br />-->
+                                @*<h4 class="text-center" style="font-size:10px; color:black;">Posted On: @Html.DisplayFor(modelItem => post.CreatedOn)</h4>*@
+
+                            <!--</div>-->
+                            <br />
+                            <a class="pull-left btn btn-warning">Add to Cart</a>
+
+
+
+                            @*<a href="" onclick="ConfirmDelete(@post.Id)" class="btn btn-danger pull-right" style="margin-top:10px;">Delete Post</a>*@
+                        </td>
+
+
+            </tr>
+        }
+
+                </table>
+
+
+                <!--<div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+
+                    <div class="modal-header">
+                        <a href="#" class="close" data-dismiss="modal">&times;</a>
+                        <h3 class="modal-title">Delete Post</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Are you sure ? You want to delete this post. </h4>
+
+                        <div style="text-align:center;display:none" id="loaderDiv">-->
+                @*<img src="~/Content/img/2xkV.gif" style="height:200px;width:200px" />*@
+                <!--</div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                            <a href="#" class="btn btn-success" onclick="DeletePost()">Confirm</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <input type="hidden" id="Id" />-->
+            </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@section Scripts{
+
+        <script>
+
+            var ConfirmDelete = function (Id) {
+
+                $("#Id").val(Id);
+                $("#myModal").modal('show');
+
+            }
+
+            var DeletePost = function () {
+
+                $("#loaderDiv").show();
+
+                var postId = $("#Id").val();
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "/Social/DeletePost",
+                    data: { Id: postId },
+                    success: function (result) {
+                        $("#loaderDiv").hide();
+                        $("#myModal").modal("hide");
+                        $("#row_" + postId).remove();
+
+                    }
+
+                })
+
+            }
+        </script>
+
+
+    }*@
+
+
+
+

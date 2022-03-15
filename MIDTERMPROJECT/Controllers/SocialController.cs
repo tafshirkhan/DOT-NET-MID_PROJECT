@@ -22,7 +22,7 @@ namespace MIDTERMPROJECT.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            return View();
+            return View(new postVM());
         }
 
         
@@ -47,6 +47,7 @@ namespace MIDTERMPROJECT.Controllers
             //Post post = new Post();
             //post.User_Post = postVM.User_Post;
             //post.CreatedOn = postVM.CreatedOn;
+            
             using (friend_finderEntities2 _db = new friend_finderEntities2())
             {
                 _db.Posts.Add(postVM);

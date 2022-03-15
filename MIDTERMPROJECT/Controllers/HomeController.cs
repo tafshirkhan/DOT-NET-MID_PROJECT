@@ -52,6 +52,7 @@ namespace MIDTERMPROJECT.Controllers
 
             list.Add(new SideMenuItemVM { Link = "/BusinessUser/CategoryIndex", LinkName = "All Category" });
             list.Add(new SideMenuItemVM { Link = "/BusinessUser/ProductIndex", LinkName = "All Product" });
+            list.Add(new SideMenuItemVM { Link = "/Purchase/PurchaseIndex", LinkName = "Purchase Product" });
             list.Add(new SideMenuItemVM { Link = "/Social/PostIndex", LinkName = "Add New Post" });
             list.Add(new SideMenuItemVM { Link = "/Social/AllComments", LinkName = "Explore All the Post" });
             list.Add(new SideMenuItemVM { Link = "/Social/ViewPost", LinkName = "View Post" });

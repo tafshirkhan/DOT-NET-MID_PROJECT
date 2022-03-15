@@ -131,6 +131,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BusinessUserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\SocialController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -365,6 +366,8 @@
     <Content Include="Views\Social\ViewProfile.cshtml" />
     <Content Include="Views\Shared\SideBarBeforeLoginView.cshtml" />
     <Content Include="Views\Home\InnerView.cshtml" />
+    <Content Include="Views\BusinessUser\EditProduct.cshtml" />
+    <Content Include="Views\Purchase\PurchaseIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

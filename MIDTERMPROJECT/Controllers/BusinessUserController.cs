@@ -24,16 +24,19 @@ namespace MIDTERMPROJECT.Controllers
             return View();
         }
 
-        [HttpGet]
+        
         public ActionResult GetAllCategory()
         {
             friend_finderEntities2 _db = new friend_finderEntities2();
-            //int userId = Convert.ToInt32(Session["Id"]);
-            //if (userId == 0)
-            //{
-            //    return RedirectToAction("Login", "Account");
-            //}
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            _db.Configuration.ProxyCreationEnabled = false;
             var allCat = _db.Categories;
+            //return View(allCat);
+           
             return Json(new { data = allCat }, JsonRequestBehavior.AllowGet);
         }
 
@@ -153,8 +156,10 @@ namespace MIDTERMPROJECT.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
+            _db.Configuration.ProxyCreationEnabled = false;
             var allPro = _db.Products.ToList();
             return Json(new { data = allPro }, JsonRequestBehavior.AllowGet);
+            //return View(allPro);
         }
 
         //public ActionResult ListOfCat()
@@ -221,8 +226,56 @@ namespace MIDTERMPROJECT.Controllers
             _db.Products.Add(productVM);
 
             _db.SaveChanges();
-            return RedirectToAction("ProductIndex", new { id=productVM.Id});
+            return RedirectToAction("ProductIndex", new { id = productVM.Id });
         }
+
+        [HttpGet]
+        public ActionResult EditProduct(int id)
+        {
+            friend_finderEntities2 _db = new friend_finderEntities2();
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            //var product = _db.Products.Find(id);
+            var catList = _db.Categories.ToList();
+            var product = (from n in _db.Products where n.Id == id select n).FirstOrDefault();
+            ViewBag.CatList = new SelectList(catList, "id", "categoryName");
+            //var catList = _db.Categories.ToList();
+            //product.CategoryList = new SelectList(catList, "id", "categoryName");           
+            return View(product);
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteProduct(int id)
+        {
+            friend_finderEntities2 _db = new friend_finderEntities2();
+            int userId = Convert.ToInt32(Session["Id"]);
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            Product proId = _db.Products.Where(x => x.Id == id).FirstOrDefault<Product>();
+            //if (catId == null)
+            //{
+            //    return Json(new { success = false, message = "Error" });
+            //}
+            _db.Products.Remove(proId);
+            _db.SaveChanges();
+            return Json(new { success = true, message = "Delete Successful" }, JsonRequestBehavior.AllowGet);
+            // message = "Delete Successful"
+        }
+
+
+
+
+
+
+
+
+
 
         //[HttpGet]
         //public ActionResult InsertProduct()

@@ -24,7 +24,7 @@ namespace MIDTERMPROJECT.Models.Dataase
         public string productQuantity { get; set; }
         public int categoryId { get; set; }
 
-        //public SelectList CategoryList { get; set; }
+        public SelectList CategoryList { get; set; }
         public HttpPostedFileBase ImageFiles { get; set; }
 
         public virtual Category Category { get; set; }

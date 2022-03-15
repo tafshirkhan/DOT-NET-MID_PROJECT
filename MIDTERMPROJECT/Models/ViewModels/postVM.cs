@@ -17,6 +17,7 @@ namespace MIDTERMPROJECT.Models.ViewModels
         
         [DisplayName("Upload File")]
         public string Image { get; set; }
+        [Required]
         public DateTime? CreatedOn { get; set; }
         [Required]
         public HttpPostedFileBase ImageFile { get; set; }

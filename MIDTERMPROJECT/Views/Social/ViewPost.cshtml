@@ -51,7 +51,7 @@
 
                             <span class="pull-left" style="font-size:15px; color:darkgreen; margin-top:-65px">
                                 @post.User_Post
-                                
+
                                 <h4 class="text-center" style="font-size:10px; color:black;">Posted On: @Html.DisplayFor(modelItem => post.CreatedOn)</h4>
                             </span>
 
@@ -73,6 +73,15 @@
                                     <h4 class="" style="font-size:10px; color:black;">Replied by: <b style="color:blue;"><a href="/Social/ViewProfile/@reply.User_id"> @Html.DisplayFor(modelItem => reply.User.Username)</a></b></h4>
                                     <h4 class="" style="font-size:10px; color:black;"><b style="color:green">@Html.DisplayFor(modelItem => reply.Reply_Cmnt) </b> Posted On: @Html.DisplayFor(modelItem => reply.CreatedOn)</h4>
                                 }
+
+                                <br />
+                                @*using (Html.BeginForm("ReplyComment", "Social", FormMethod.Post))
+                                {
+                                    <input type="text" name="ReplyComment" style="width:80%; height:50px;" />
+                                    <br />
+                                    <input type="hidden" name="CommentId" value="@post.Id" />
+                                    <input type="submit" value="Reply Comment" class="btn btn-danger" style="margin-top:10px; font-size:10px;" />
+                                }*@
 
                             }
                             @*<a href="" onclick="ConfirmDelete(@post.Id)" class="btn btn-danger pull-right" style="margin-top:10px;">Delete Post</a>*@
